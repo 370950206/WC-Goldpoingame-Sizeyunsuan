@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int n, n1;
+char fun(int op){ if (op == 0)return '+'; else if (op == 1)return '*'; else if (op == 2)return '-'; else return '/'; }
+int  Compute(int a, int b, int op)
+{
+	int p;
+	if (op == 0)p = a + b; else if (op == 1)p = a*b; else if (op == 2)p = a - b; else p = a / b;
+	if (n == p){
+		n1++;
+		return 1;
+	}
+	else
+		return 0;
+}
+void Print(int flag)
+{
+	if (flag == 1)printf("Right!\n");
+	else
+		printf("Not correct!\n");
+}
+void main()
+{
+	srand((unsigned)time(NULL));
+	int a, b, op, i = 0, num;
+	while (true)
+	{
+		if (i == 10)break;
+		a = rand() % 10 + 1;
+		b = rand() % 10 + 1;
+		op = rand() % 4;
+		if (a%b == 0 && a >= b)
+		{
+			i++;
+			printf("%d%c%d=", a, fun(op), b);
+			scanf_s("%d", &n);
+			num = Compute(a, b, op);
+			Print(num);
+		}
+	}
+	printf("you grade is:%d,you falsed %d!\n", n1 * 10, 10 - n1);
+}
